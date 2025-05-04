@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <!-- 欢迎用户名 -->
+    <TextView
+        android:id="@+id/userGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello, User"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 进度条 -->
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -14,6 +25,7 @@
         android:max="3"
         android:progress="0" />
 
+    <!-- 题目文本 -->
     <TextView
         android:id="@+id/questionText"
         android:layout_width="match_parent"
@@ -22,6 +34,7 @@
         android:textSize="20sp"
         android:layout_marginTop="20dp" />
 
+    <!-- 答案选项 -->
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
@@ -33,6 +46,7 @@
         <RadioButton android:id="@+id/option3" android:text="Option 3" />
     </RadioGroup>
 
+    <!-- 提交按钮 -->
     <Button
         android:id="@+id/submitButton"
         android:text="Submit"
@@ -40,3 +54,4 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp" />
 </LinearLayout>
+

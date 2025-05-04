@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView questionText;
+    TextView userGreeting, questionText;
     RadioGroup radioGroup;
     RadioButton option1, option2, option3;
     Button submitButton;
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     int currentQuestionIndex = 0;
     int score = 0;
+    String userName = "";
 
     String[] questions = {
             "What is 2 + 2?",
@@ -30,13 +31,14 @@ public class MainActivity extends AppCompatActivity {
             {"Earth", "Mars", "Jupiter"}
     };
 
-    int[] correctAnswers = {1, 1, 1}; // 每题正确选项下标
+    int[] correctAnswers = {1, 1, 1}; // 正确选项下标
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        userGreeting = findViewById(R.id.userGreeting);
         questionText = findViewById(R.id.questionText);
         radioGroup = findViewById(R.id.radioGroup);
         option1 = findViewById(R.id.option1);
@@ -44,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         option3 = findViewById(R.id.option3);
         submitButton = findViewById(R.id.submitButton);
         progressBar = findViewById(R.id.progressBar);
+
+        // 接收用户名并展示
+        userName = getIntent().getStringExtra("username");
+        userGreeting.setText("Hello, " + userName + "!");
 
         loadQuestion();
 
@@ -59,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 RadioButton selectedButton = findViewById(selectedId);
                 int selectedIndex = radioGroup.indexOfChild(selectedButton);
 
-                // 清除背景颜色
                 for (int i = 0; i < radioGroup.getChildCount(); i++) {
                     radioGroup.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                 }
@@ -73,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                     correctButton.setBackgroundColor(Color.GREEN);
                 }
 
-                // 延迟加载下一题
                 submitButton.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -106,8 +110,10 @@ public class MainActivity extends AppCompatActivity {
     private void goToResult() {
         Intent intent = new Intent(MainActivity.this, ResultActivity.class);
         intent.putExtra("score", score);
+        intent.putExtra("username", userName); // 保留用户名传递到结果页
         startActivity(intent);
         finish();
     }
 }
+
 
